@@ -1,5 +1,5 @@
 # Construindo um Sistema de Hospedagem de um Hotel no C#
-<img align="right" height="200" src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fbr.freepik.com%2Ffotos-vetores-gratis%2Fhotel-desenho&psig=AOvVaw0zlB7RWuPX2_ACYWLSoFrF&ust=1758093375116000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCMjg9Zrd3I8DFQAAAAAdAAAAABAE">
+<img align="right" height="200" src="https://img.freepik.com/vetores-premium/modelo-de-ilustracao-desenhada-a-mao-de-desenho-animado-plano-para-hotel-arranha-ceu-com-design-de-vista-panoramica_2175-10129.jpg">
 
 Neste projeto de sistema de hospedagem, criado para um desafio da DIO, foi realizado um fork do repositório GitHub da Digital Innovation One (digitalinnovationone/trilha-net-explorando-desafio), onde o projeto já veio quase pronto. Como percebi que a saída que o Professor Buta desejava era "Premium", capacidade, valorDiaria, modifiquei vários métodos para criar e fazer com que o usuário pudesse escolher os quartos que deseja reservar, no qual cada quarto tem um valor e capacidade de hóspedes diferentes. Com o quarto escolhido, o usuário digita a quantidade de hóspedes, e a partir daí é calculado o valor da diária do quarto vezes a quantidade de hóspedes. Para que isso pudesse ocorrer, implementei na classe Suite mais um atributo: "QuantidadeHospedes".
 
