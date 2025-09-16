@@ -1,21 +1,54 @@
-# DIO - Trilha .NET - Explorando a linguagem C#
-www.dio.me
+# Construindo um Sistema de Hospedagem de um Hotel no C#
+<img align="right" height="200" src="https://img.freepik.com/vetores-premium/modelo-de-ilustracao-desenhada-a-mao-de-desenho-animado-plano-para-hotel-arranha-ceu-com-design-de-vista-panoramica_2175-10129.jpg">
 
-## Desafio de projeto
-Para este desafio, você precisará usar seus conhecimentos adquiridos no módulo de explorando a linguagem C#, da trilha .NET da DIO.
+Neste projeto de sistema de hospedagem, criado para um desafio da DIO, foi realizado um fork do repositório GitHub da Digital Innovation One (digitalinnovationone/trilha-net-explorando-desafio), onde o projeto já veio quase pronto. Como percebi que a saída que o Professor Buta desejava era "Premium", capacidade, valorDiaria, modifiquei vários métodos para criar e fazer com que o usuário pudesse escolher os quartos que deseja reservar, no qual cada quarto tem um valor e capacidade de hóspedes diferentes. Com o quarto escolhido, o usuário digita a quantidade de hóspedes, e a partir daí é calculado o valor da diária do quarto vezes a quantidade de hóspedes. Para que isso pudesse ocorrer, implementei na classe Suite mais um atributo: "QuantidadeHospedes".
 
-## Contexto
-Você foi contratado para construir um sistema de hospedagem, que será usado para realizar uma reserva em um hotel. Você precisará usar a classe Pessoa, que representa o hóspede, a classe Suíte, e a classe Reserva, que fará um relacionamento entre ambos.
+Ficou assim: três classes principais: Pessoa, Reserva e Suite.
 
-O seu programa deverá cálcular corretamente os valores dos métodos da classe Reserva, que precisará trazer a quantidade de hóspedes e o valor da diária, concedendo um desconto de 10% para caso a reserva seja para um período maior que 10 dias.
+Na classe Pessoa, não modifiquei nada.
 
-## Regras e validações
-1. Não deve ser possível realizar uma reserva de uma suíte com capacidade menor do que a quantidade de hóspedes. Exemplo: Se é uma suíte capaz de hospedar 2 pessoas, então ao passar 3 hóspedes deverá retornar uma exception.
-2. O método ObterQuantidadeHospedes da classe Reserva deverá retornar a quantidade total de hóspedes, enquanto que o método CalcularValorDiaria deverá retornar o valor da diária (Dias reservados x valor da diária).
-3. Caso seja feita uma reserva igual ou maior que 10 dias, deverá ser concedido um desconto de 10% no valor da diária.
+Na classe Suite, trabalhei com atributos como tipo de suíte, capacidade, valor da diária e quantidade de hóspedes. Utilizei um método SelecionarTipoSuite com um loop while que continua executando até o usuário escolher uma opção válida entre Premium, Luxo ou Standard. Dentro deste método, usei um switch case para atribuir os valores e capacidade de hóspedes específicos de cada tipo de suíte. No método SelecionarCapacidade, implementei um while com tratamento de exceções usando try-catch para garantir que a quantidade de hóspedes não exceda a capacidade máxima da suíte. Usei if para validar se a quantidade desejada é válida e throw new ArgumentException para lançar exceções personalizadas quando necessário.
 
+Na classe Reserva, o método CalcularValorDiaria é o mais complexo, onde usei um while true com tratamento de exceções para garantir que o usuário digite um número válido de dias. Implementei if para verificar se a reserva tem mais de 10 dias e aplicar o desconto de 10%, e usei múltiplos blocos catch para tratar diferentes tipos de exceções, como FormatException e Exception genérica.
 
-![Diagrama de classe estacionamento](diagrama_classe_hotel.png)
+Em todos os métodos, utilizei Console.WriteLine para interagir com o usuário e Console.ReadLine para capturar entradas, criando uma interface interativa via console. O tratamento de exceções foi implementado de forma abrangente para garantir que o sistema não quebre com entradas inválidas do usuário, proporcionando uma experiência robusta e amigável.
+# Diagrama 
+```mermaid
+classDiagram
+    class Pessoa {
+        +string Nome
+        +string Sobrenome
+        +string NomeCompleto
+        +Pessoa()
+        +Pessoa(string nome)
+        +Pessoa(string nome, string sobrenome)
+    }
 
-## Solução
-O código está pela metade, e você deverá dar continuidade obedecendo as regras descritas acima, para que no final, tenhamos um programa funcional. Procure pela palavra comentada "TODO" no código, em seguida, implemente conforme as regras acima.
+    class Reserva {
+        +List~Pessoa~ Hospedes
+        +Suite Suite
+        +int DiasReservados
+        +Reserva()
+        +Reserva(int diasReservados)
+        +CadastrarSuite(Suite suite)
+        +CadastrarHospedes(List~Pessoa~ hospedes)
+        +ObterQuantidadeHospedes() int
+        +CalcularValorDiaria() decimal
+    }
+
+    class Suite {
+        -int quantidadeHospedes
+        +string TipoSuite
+        +int Capacidade
+        +decimal ValorDiaria
+        +int QuantidadeHospedes
+        +Suite()
+        +Suite(string tipoSuite, int capacidade, decimal valorDiaria)
+        +SelecionarTipoSuite()
+        +SelecionarCapacidade()
+        +CalcularValorDiaria()
+    }
+
+    Reserva  <--  Suite 
+    Reserva  <--  Pessoa 
+```
